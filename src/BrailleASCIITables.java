@@ -2,12 +2,29 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/* 
+ * This is a class that stores BitTrees that can be used to convert ASCII, unicode, and braille characters
+ * 
+ * @author: Candice Lu
+ */
+
 public class BrailleASCIITables {
 
+    // +--------+------------------------------------------------------
+    // | Fields |
+    // +--------+
+
+    // BitTree that converts braille to ASCII character
     BitTree brailleToASCII;
+    // BitTree that converts braille to Unicode string
     BitTree brailleToUnicode;
+    // BitTree that converts Unicode string to Braille string
     BitTree ASCIItoBraille;
     
+    // +--------------+------------------------------------------------
+    // | Constructors |
+    // +--------------+  
+
     public BrailleASCIITables() throws FileNotFoundException, Exception {
         this.brailleToASCII = new BitTree(6);
         this.brailleToASCII.load(new FileInputStream(new File("../lib/BrailleToASCII.txt")));
@@ -16,6 +33,10 @@ public class BrailleASCIITables {
         this.ASCIItoBraille = new BitTree(8);
         this.ASCIItoBraille.load(new FileInputStream(new File("../lib/ASCIIToBraille.txt")));
     }
+
+    // +---------+------------------------------------------------------
+    // | Methods |
+    // +---------+
 
     /*
      * converts an ASCII character to a string of bits representing 
@@ -44,8 +65,6 @@ public class BrailleASCIITables {
      */
     public char toUnicode(String bits) throws Exception {
         String unicodeString = this.brailleToUnicode.get(bits);
-        //System.out.println("Parsed integer = " + Integer.parseInt(unicodeString, 16));
-        //System.out.println("Resulting character = " + Character.toChars(Integer.parseInt(unicodeString, 16))[0]);
         return Character.toChars(Integer.parseInt(unicodeString, 16))[0];
     }
 }

@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.InputStreamReader;
 
+/* 
+ * This is a class that stores values into a binary search tree
+ * 
+ * @author: Candice Lu
+ */
 
 public class BitTree {
     
@@ -29,6 +34,10 @@ public class BitTree {
         this.cache = null;
     }
 
+    // +---------+------------------------------------------------------
+    // | Methods |
+    // +---------+
+
     /*
      * follows the path through the tree given by bits (adding nodes as appropriate) 
      * and adds or replaces the value at the end with value. set should throw an 
@@ -43,22 +52,24 @@ public class BitTree {
         setHelper(this.root, path, value);
     }
 
+    /*
+     * Recursively calls itself until it reaches destination, then it returns a BitTreeLeaf
+     */
     public BitTreeNode setHelper(BitTreeNode node, String path, String value) throws Exception{
-
+        // if we are at the end of the path
         if (path.equals("")) {
             return new BitTreeLeaf(value);
         }
-
+        // not at the end of path, figure out direction
         int dir = (int)path.charAt(0) - 48;
-
+        // if current node is null, we create a inner BitTreeNode and continue
         if (node == null) {
             node = new BitTreeNode();
         }
+        // continue to traverse
         if (dir == 0) {
-            //System.out.println(path.substring(1));
             node.left = setHelper(node.left, path.substring(1), value);
         } else if (dir == 1){
-            //System.out.println(path.substring(1));
             node.right = setHelper(node.right, path.substring(1), value);
         } else {
             throw new Exception("Contains values other than 0 or 1");
@@ -72,11 +83,9 @@ public class BitTree {
      */
     public String get(String bits) throws Exception{
         if (bits.length() != this.bitLength) {
-            //System.out.println("this.bitLength = " + this.bitLength);
-            //System.out.println("path length = " + bits.length());
             throw new Exception("Bits are of inappropriate length");
         }
-        BitTreeLeaf leaf = getHelper(root, bits);
+        BitTreeLeaf leaf = getHelper(this.root, bits);
         return leaf.value;
     }
 
@@ -91,7 +100,6 @@ public class BitTree {
         int dir = (int)bits.charAt(0) - 48;
 
         if (dir != 0 && dir != 1) {
-            //System.out.println((int)("0123".charAt(0)) == 48);
             throw new Exception("Contains values other than 0 or 1");
         } else if (dir == 0){
             return getHelper(node.left, bits.substring(1));
@@ -111,7 +119,8 @@ public class BitTree {
     }
 
     /*
-     * Recursively calls itself until tree is fully traversed
+     * Recursively calls itself and prints values when encounters a BitTreeLeaf, 
+     * until tree is fully traversed
      */
     public void dumpHelper(PrintWriter pen, BitTreeNode node, String bitString) {
         // current node is a BitTreeLeaf, print the value and stop calling
