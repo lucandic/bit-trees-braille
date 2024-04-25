@@ -29,9 +29,10 @@ public class BrailleASCII {
             output = charToUnicode(toTranslate, tables);
         } else {
             System.err.println("Invalid command");
+            System.exit(1);
         }
         pen.println(output);
-    }
+    } // main(args)
 
     /*
      * Converts a string a bits into a string of braille Unicode characters
@@ -48,5 +49,5 @@ public class BrailleASCII {
             output += ch;
         }
         return output;
-    }
-}
+    } // charToUnicode(toTranslate, tables)
+} // class BrailleASCII

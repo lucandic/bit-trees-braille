@@ -32,7 +32,7 @@ public class BitTree {
         this.root = new BitTreeNode();
         this.size = 0;
         this.cache = null;
-    }
+    } // BitTree(n)
 
     // +---------+------------------------------------------------------
     // | Methods |
@@ -45,12 +45,10 @@ public class BitTree {
      */
     public void set(String path, String value) throws Exception {
         if (path.length() != this.bitLength) {
-            //System.out.println("path length = " + path.length());
-            //System.out.println("this.bitLength = " + this.bitLength);
             throw new Exception("Bits are of inappropriate length");
         }
         setHelper(this.root, path, value);
-    }
+    } // set(path, value)
 
     /*
      * Recursively calls itself until it reaches destination, then it returns a BitTreeLeaf
@@ -75,7 +73,7 @@ public class BitTree {
             throw new Exception("Contains values other than 0 or 1");
         }
         return node;
-    }
+    } // bitTreeNode(node, path, value)
 
     /*
      * follows the path through the tree given by bits, returning the value at the end. 
@@ -87,7 +85,7 @@ public class BitTree {
         }
         BitTreeLeaf leaf = getHelper(this.root, bits);
         return leaf.value;
-    }
+    } // get(bits)
 
     /*
      * Recursively calls itself until it reaches destination
@@ -108,7 +106,7 @@ public class BitTree {
         } else {
             throw new Exception("No such path");
         }
-    }
+    } // getHelper(node, bits)
 
     /*
      * prints out the contents of the tree in CSV format. For example, 
@@ -116,7 +114,7 @@ public class BitTree {
      */
     public void dump(PrintWriter pen) {
         dumpHelper(pen, this.root, "");
-    }
+    } // dump(pen)
 
     /*
      * Recursively calls itself and prints values when encounters a BitTreeLeaf, 
@@ -135,7 +133,7 @@ public class BitTree {
         // current node is a BitTreeNode
         dumpHelper(pen, node.left, bitString + "0");
         dumpHelper(pen, node.right, bitString + "1");
-    }
+    } // dumpHelper(pen, node, bitString)
 
     /*
      * reads a series of lines of the form bits, value and stores them in the tree.
@@ -143,10 +141,11 @@ public class BitTree {
     public void load(InputStream source) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(source));
         String line = reader.readLine();
+        // continues to read until end of file
         while (line != null) {
             String[] parts = line.split(",");
             this.set(parts[0], parts[1]);
             line = reader.readLine();
         }
-    }
-}
+    } // load(source)
+} // class BitTree

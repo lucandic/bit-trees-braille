@@ -11,5 +11,5 @@ public class BitTreeLeaf extends BitTreeNode{
     public BitTreeLeaf(String value) {
         super();
         this.value = value;
-    }
-}
+    } // BitTreeLeaf(value)
+} // class BitTreeLeaf
