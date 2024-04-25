@@ -44,7 +44,8 @@ public class BrailleASCIITables {
      */
     public char toUnicode(String bits) throws Exception {
         String unicodeString = this.brailleToUnicode.get(bits);
-        System.out.println("Parsed integer = " + Integer.parseInt(unicodeString, 16));
-        return Character.toChars(Integer.parseInt(unicodeString))[0];
+        //System.out.println("Parsed integer = " + Integer.parseInt(unicodeString, 16));
+        //System.out.println("Resulting character = " + Character.toChars(Integer.parseInt(unicodeString, 16))[0]);
+        return Character.toChars(Integer.parseInt(unicodeString, 16))[0];
     }
 }

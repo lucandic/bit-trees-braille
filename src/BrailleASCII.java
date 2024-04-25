@@ -19,14 +19,9 @@ public class BrailleASCII {
                 //System.out.println(output);
             }
         } else if (command.equals("unicode")) {
-            // char -> braillepath -> unicode character
-            //String pathBits = "";
-            /*
-            for (int i = 0; i < toTranslate.length(); i++){
-                pathBits += tables.toBraille(toTranslate.charAt(i));
-            }
-            */
             output = charToUnicode(toTranslate, tables);
+        } else {
+            System.err.println("Invalid command");
         }
         pen.println(output);
     }
